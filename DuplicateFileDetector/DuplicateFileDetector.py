@@ -1,0 +1,62 @@
+"""
+traverse directory tree from given node and find all duplicate files and sort the output by the file sizes"""
+import os
+import hashlib
+from collections import defaultdict
+from operator import itemgetter
+from multiprocessing import Pool
+
+def ComputeFileHashes(f,buffer_size=65536):
+	try:
+		with open(f,'rb') as hash_this:
+			md5_hasher=hashlib.md5()
+			while True:
+				data=hash_this.read(buffer_size)
+				if not data:
+					break
+				md5_hasher.update(data)
+			return (f,md5_hasher.digest())
+	except FileNotFoundError:
+		pass 
+
+def GetDuplicates(dup_dict):
+	for key in dup_dict.keys():
+		if len(dup_dict[key])>2:
+			yield tuple(dup_dict[key])
+
+def GenerateFiles(start):
+	for base,dirs,files in os.walk(start):
+		files_arg=(os.path.join(base,x) for x in files)
+		for fi in files_arg:
+			yield fi 
+
+
+if __name__=='__main__':
+	print("enter the path for the starting node in the directory tree: ")
+	start=input() 
+	assert isinstance(start,str)
+	if not os.path.exists(start):
+		print('path does not exist')
+		exit(1)
+	if not os.path.isdir(start):
+		print('enter path not file')
+		exit(2)	
+	dup_dict=defaultdict(list)
+	pool=Pool()
+	filenames=(x for x in GenerateFiles(start))
+	file_and_hash=pool.imap(ComputeFileHashes,filenames)
+	for f,h in file_and_hash:
+		dup_dict[h].append(f)
+	for k in dup_dict.keys():
+		dup_dict[k].append(os.path.getsize(dup_dict[k][0]))	
+	duplicates=[ d for d in GetDuplicates(dup_dict)]
+	duplicates.sort(key=itemgetter(-1),reverse=True)
+	with open('duplicate_files.txt','w') as outfile:
+		print('Duplicate files sorted by file size in bytes (rightmost number)',file=outfile)
+		print(file=outfile)
+		if duplicates!=[]:
+			for d in duplicates:
+				outstring=' '.join(str(x) for x in d)
+				print(outstring,file=outfile)
+		else:
+			print('no duplicates here')
