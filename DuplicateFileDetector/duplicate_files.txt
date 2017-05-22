@@ -1,0 +1,11 @@
+Duplicate files sorted by file size in bytes (rightmost number)
+
+C:\Users\abkma\Desktop\EdgeFill\MossyFill.psd C:\Users\abkma\Desktop\sameasedgefill\MossyFill.psd 1473964
+C:\Users\abkma\Desktop\EdgeFill\ForestFill.psd C:\Users\abkma\Desktop\sameasedgefill\ForestFill.psd 406508
+C:\Users\abkma\Desktop\Kulkarni_1513588_project1\summary.pdf C:\Users\abkma\Desktop\Kulkarni_1513588_project1\Kulkarni_1513588_project1\summary.pdf 34519
+C:\Users\abkma\Desktop\Kulkarni_1513588_project1\output.txt C:\Users\abkma\Desktop\Kulkarni_1513588_project1\Kulkarni_1513588_project1\output.txt 26623
+C:\Users\abkma\Desktop\Kulkarni_1513588_project1\Kulkarni_1513588_project1\__pycache__\MoveGenerator.cpython-36.pyc C:\Users\abkma\Desktop\Kulkarni_1513588_project1\__pycache__\MoveGenerator.cpython-36.pyc 6771
+C:\Users\abkma\Desktop\Kulkarni_1513588_project1\MoveGenerator.py C:\Users\abkma\Desktop\Kulkarni_1513588_project1\Kulkarni_1513588_project1\MoveGenerator.py 6694
+C:\Users\abkma\Desktop\Kulkarni_1513588_project1\main.py C:\Users\abkma\Desktop\Kulkarni_1513588_project1\Kulkarni_1513588_project1\main.py 6496
+C:\Users\abkma\Desktop\Kulkarni_1513588_project1\Kulkarni_1513588_project1\__pycache__\FileHandler.cpython-36.pyc C:\Users\abkma\Desktop\Kulkarni_1513588_project1\__pycache__\FileHandler.cpython-36.pyc 1982
+C:\Users\abkma\Desktop\Kulkarni_1513588_project1\FileHandler.py C:\Users\abkma\Desktop\Kulkarni_1513588_project1\Kulkarni_1513588_project1\FileHandler.py 1598

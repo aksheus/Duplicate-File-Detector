@@ -5,6 +5,7 @@ import hashlib
 from collections import defaultdict
 from operator import itemgetter
 from multiprocessing import Pool
+from Detector import Detector
 
 def ComputeFileHashes(f,buffer_size=65536):
 	try:
@@ -40,17 +41,10 @@ if __name__=='__main__':
 		exit(1)
 	if not os.path.isdir(start):
 		print('enter path not file')
-		exit(2)	
-	dup_dict=defaultdict(list)
-	pool=Pool()
-	filenames=(x for x in GenerateFiles(start))
-	file_and_hash=pool.imap(ComputeFileHashes,filenames)
-	for f,h in file_and_hash:
-		dup_dict[h].append(f)
-	for k in dup_dict.keys():
-		dup_dict[k].append(os.path.getsize(dup_dict[k][0]))	
-	duplicates=[ d for d in GetDuplicates(dup_dict)]
-	duplicates.sort(key=itemgetter(-1),reverse=True)
+		exit(2)
+	detector= Detector(start)
+	detector.FindAllDuplicates()
+	duplicates=detector.SortedOutput()
 	with open('duplicate_files.txt','w') as outfile:
 		print('Duplicate files sorted by file size in bytes (rightmost number)',file=outfile)
 		print(file=outfile)
