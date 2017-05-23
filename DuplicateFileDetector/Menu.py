@@ -16,6 +16,7 @@ class Menu:
         self.ButtonPositions=[225,150]
         self.ChosenPath=''
         self.ChosenFile=''
+        self.IsSingle=False
         self.SetupButtons()
         self.Root.mainloop()
 
@@ -25,7 +26,6 @@ class Menu:
         if not os.path.exists(self.ChosenPath):
             messagebox.showerror('Error','Path Does not Exist')
             self.Root.destroy()
-        print(self.ChosenPath)
 
     def AddButton(self,Text,Action=None):
         self.Buttons.append(tkinter.Button(self.Root,text=Text,command=Action))
@@ -44,5 +44,4 @@ class Menu:
         if not os.path.exists(self.ChosenFile):
             messagebox.showerror('Error','File Does Not Exist')
             self.Root.destroy()
-        print(self.ChosenFile)
-
+        self.IsSingle=True
