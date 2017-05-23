@@ -58,6 +58,11 @@ class Detector:
         duplicates.sort(key=itemgetter(-1),reverse=True) # largest duplicate files first 
         return duplicates
 
+    def FindDuplicate(self,SearchFile):
+        self.FindAllDuplicates() # need to do this anyway as more than one duplicate may exist
+        target=self.ComputeFileHashes(SearchFile)[-1]
+        return self.DuplicatesDict[target] # warning : returns []
+
 
 
 
