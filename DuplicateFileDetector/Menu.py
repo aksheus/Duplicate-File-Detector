@@ -1,5 +1,7 @@
-from tkinter import filedialog
+from tkinter import filedialog,messagebox
+from builtins import str
 import tkinter
+import os 
 class Menu:
 
     def __init__(self,Title,Resolution,):
@@ -14,12 +16,16 @@ class Menu:
         self.ButtonPositions=[225,150]
         self.ChosenPath=''
         self.ChosenFile=''
-        self.AddButton(Text="Search All Duplicates",Action= lambda: print('all'))
-        self.AddButton(Text="Find Duplicate of File",Action=lambda: print('one'))
+        self.SetupButtons()
+        self.Root.mainloop()
 
     def GetSearchPath(self):
         self.ChosenPath=filedialog.askdirectory(parent=self.Root,initialdir="/",title="Please select base directory")
-        # add validation code then return 
+        assert isinstance(self.ChosenPath,str)
+        if not os.path.exists(self.ChosenPath):
+            messagebox.showerror('Error','Path Does not Exist')
+            self.Root.destroy()
+        print(self.ChosenPath)
 
     def AddButton(self,Text,Action=None):
         self.Buttons.append(tkinter.Button(self.Root,text=Text,command=Action))
@@ -27,7 +33,16 @@ class Menu:
         self.Buttons[-1].place(x=self.ButtonPositions[0],y=self.ButtonPositions[1])
         self.ButtonPositions[1]+=60
 
+    def SetupButtons(self):
+        self.AddButton(Text="Search All Duplicates",Action= self.GetSearchPath)
+        self.AddButton(Text="Find Duplicate of File",Action= self.GetFileAndPath)
 
-
-
+    def GetFileAndPath(self):
+        self.GetSearchPath()
+        self.ChosenFile=filedialog.askopenfilename(parent=self.Root,title='Choose a File')
+        assert isinstance(self.ChosenFile,str)
+        if not os.path.exists(self.ChosenFile):
+            messagebox.showerror('Error','File Does Not Exist')
+            self.Root.destroy()
+        print(self.ChosenFile)
 
