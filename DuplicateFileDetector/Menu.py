@@ -8,7 +8,7 @@ class Menu:
         self.Root=tkinter.Tk()
         self.Root.title(Title)
         self.Root.geometry(Resolution)
-        self.MenuTitle = tkinter.Label(self.Root, text="Choose One",width=25,font=('Consolas',16))
+        self.MenuTitle = tkinter.Label(self.Root, text="Generate Duplicates Csv",width=25,font=('Consolas',16))
         self.MenuTitle.pack()
         self.MenuTitle.place(x=125,y=50)
         self.Root.configure(background="black")
